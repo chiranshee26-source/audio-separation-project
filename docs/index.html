@@ -151,6 +151,16 @@ input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;bac
 .legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px;font-size:.9rem}
 .legend span{display:flex;align-items:center;gap:8px}.legend i{width:11px;height:11px;border-radius:50%}
 
+/* scenes */
+.scenes{display:flex;gap:10px;flex-wrap:wrap;margin:-8px 0 26px}
+.scene{font-family:var(--serif);font-size:1.1rem;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:10px 20px;transition:background .2s,border-color .2s,color .2s;text-decoration:none;display:inline-flex;align-items:baseline;gap:10px}
+.scene small{font-family:var(--mono);font-size:.64rem;letter-spacing:.04em;color:var(--mute)}
+.scene:hover{border-color:rgba(238,240,228,.4)}
+.scene.on{background:#f3e9cf;color:#3b2a0e;border-color:#f3e9cf}.scene.on small{color:#6b5320}
+.scene.own{border-style:dashed;color:var(--c3);border-color:rgba(95,214,180,.5)}
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+@media(max-width:880px){.fit{grid-template-columns:1fr}}
+.fit ul{margin:0;padding-left:20px;color:#cdd6c6;font-size:.98rem}.fit li{margin:6px 0}.fit b{color:var(--ink);font-weight:500}
 /* upload */
 .drops{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:880px){.drops{grid-template-columns:1fr}}
@@ -172,8 +182,8 @@ details.q summary::-webkit-details-marker{display:none}
 details.q summary::after{content:"+";font-family:var(--mono);color:var(--c1);font-size:1.3rem}
 details.q[open] summary::after{content:"–"}
 details.q p{margin:0 0 20px;color:#cdd6c6}
-footer{padding:90px 0 80px;color:var(--mute);font-size:.92rem;text-align:center;max-width:640px;margin:0 auto}
-footer em{font-family:var(--serif);color:var(--ink);font-size:1.3rem;display:block;margin-bottom:8px}
+footer{padding:60px 0 50px;color:var(--mute);font-size:.78rem;line-height:1.6;text-align:center;max-width:520px;margin:0 auto;opacity:.6}
+footer em{font-family:var(--serif);color:var(--ink);font-size:.95rem;display:block;margin-bottom:4px}
 </style>
 </head>
 <body>
@@ -189,8 +199,8 @@ footer em{font-family:var(--serif);color:var(--ink);font-size:1.3rem;display:blo
   <div class="wrap hero-inner">
     <p class="kicker">Independent Component Analysis · from scratch</p>
     <h1>Come and pull the forest <em>apart.</em></h1>
-    <p class="lede">A bird, some wind chimes and the rain, all tangled together by three microphones. Press a button and an algorithm untangles them, live, in your browser.</p>
-    <div class="ctas"><a class="btn main" href="#c1">Start listening ↓</a><a class="btn soft" href="#c6">How does it work?</a></div>
+    <p class="lede">Three sounds, tangled together by three microphones. Pick a scene or drop in your own audio, press a button, and an algorithm untangles them live in your browser.</p>
+    <div class="ctas"><a class="btn main" href="#c1">Start listening ↓</a><a class="btn soft" href="#c5">Use your own audio</a></div>
   </div>
   <div class="scroll">SCROLL</div>
 </section>
@@ -200,7 +210,8 @@ footer em{font-family:var(--serif);color:var(--ink);font-size:1.3rem;display:blo
 <main class="wrap">
 
 <section class="chapter" id="c1">
-  <div class="chead"><div class="step">Step 1 · Listen</div><h2>Three sounds in <em>the forest</em></h2><p>A bird, some wind chimes and the rain. Tap each one to hear it on its own. Remember them: the algorithm will never get to.</p></div>
+  <div class="chead"><div class="step">Step 1 · Listen</div><h2>Three sounds, <em>your pick</em></h2><p>Choose a scene, then tap each sound to hear it on its own. Remember them: the algorithm never gets to. Prefer your own? Jump to <a href="#c5" style="color:var(--c1)">step 5</a>.</p></div>
+  <div class="scenes" id="scenes"><button class="scene" data-scene="forest">Forest <small>bird · chimes · rain</small></button><button class="scene" data-scene="studio">Studio <small>voice · melody · drums</small></button><button class="scene" data-scene="street">Street <small>talking · siren · dog</small></button><a class="scene own" href="#c5">Your own audio →</a></div>
   <div class="grid3" id="srcTracks"></div>
 </section>
 
@@ -269,6 +280,18 @@ footer em{font-family:var(--serif);color:var(--ink);font-size:1.3rem;display:blo
       <span class="big">3 recordings</span><b>Drop three already-mixed recordings</b><small>Real recordings made at the same time on three devices. I'll untangle them (no scores, there's no answer key).</small></label>
   </div>
   <div class="msg" id="upMsg"></div>
+  <div class="fit">
+    <div class="card box"><h3>Works great when…</h3><ul>
+      <li>You have <b>as many recordings as sounds</b> (3 recordings, 3 sounds).</li>
+      <li>They were recorded <b>at the same moment</b>, from different spots.</li>
+      <li>The sounds are <b>different in character</b>: a voice, an instrument, a burst of noise.</li>
+      <li>Each recording is a different blend of the same sounds.</li></ul></div>
+    <div class="card box"><h3>Struggles when…</h3><ul>
+      <li>There is <b>only one microphone</b>. One recording can't be split.</li>
+      <li>The room has <b>strong echo</b> or delays between the microphones.</li>
+      <li><b>Two sounds are steady static</b>, like two fans. They look identical to the method.</li>
+      <li>The recordings are <b>very noisy</b> (try the sliders in step 4).</li></ul></div>
+  </div>
 </section>
 
 <section class="chapter" id="c6">
@@ -280,7 +303,7 @@ footer em{font-family:var(--serif);color:var(--ink);font-size:1.3rem;display:blo
 </section>
 
 </main>
-<footer><em>Made with NumPy, then ported to the browser.</em>The Python version in the repo is the reference implementation. This page runs the same pipeline (centering, PCA whitening, FastICA, SI-SDR) in JavaScript so you can play with it live.</footer>
+<footer><em>Made with NumPy, ported to the browser.</em>Python is the reference implementation; this page runs the same pipeline in JavaScript.</footer>
 
 <script>
 /*CORE_START*/
@@ -334,9 +357,72 @@ function genRain(r,N,SR){
   for(let n=0;n<N;n++)x[n]*=0.65+0.35*Math.sin(2*Math.PI*n/SR*0.23+1);
   return x;
 }
-function makeDemoSources(seed,SR,dur){
+function genSpeech(r,N,SR){
+  const x=new Float64Array(N),dur=N/SR;
+  const vowels=[[730,1090,2440],[270,2290,3010],[300,870,2240],[530,1840,2480],[570,840,2410],[660,1720,2410]];
+  const bws=[90,110,160],syl=[];let t=0.15;
+  while(t<dur-0.2){const len=0.11+r()*0.2;syl.push({a:t,b:t+len,v:vowels[(r()*vowels.length)|0],f0:105+r()*70});t+=len+(r()<0.22?0.3+r()*0.45:0.015+r()*0.05);}
+  const y1=[0,0,0],y2=[0,0,0];let phase=0,si=0;
+  const co=bws.map(()=>({r:0,a1:0,a2:0}));let lastS=-1;
+  for(let n=0;n<N;n++){
+    const tt=n/SR;
+    while(si<syl.length&&tt>=syl[si].b)si++;
+    const s=syl[si];let env=0,f0=120;
+    if(s&&tt>=s.a){const u=(tt-s.a)/(s.b-s.a);env=Math.pow(Math.sin(Math.PI*u),0.6);f0=s.f0*(1+0.08*Math.sin(2*Math.PI*u));
+      if(si!==lastS){lastS=si;for(let k=0;k<3;k++){const rr=Math.exp(-Math.PI*bws[k]/SR);co[k].r=rr;co[k].a1=2*rr*Math.cos(2*Math.PI*s.v[k]/SR);co[k].a2=-rr*rr;}}}
+    phase+=f0/SR;if(phase>=1)phase-=1;
+    const exc=((phase<0.15?(1-phase/0.15):0)+(r()-0.5)*0.03)*env;
+    let out=0;
+    for(let k=0;k<3;k++){const c=co[k];const y=(1-c.r)*exc+c.a1*y1[k]+c.a2*y2[k];y2[k]=y1[k];y1[k]=y;out+=y*(k===0?1:0.6);}
+    x[n]=out;
+  }
+  return x;
+}
+function genMelody(r,N,SR){
+  const x=new Float64Array(N),dur=N/SR,scale=[0,3,5,7,10],base=196,step=60/104/2;
+  let idx=4,n=0;
+  for(let t=0;t<dur;t+=step,n++){
+    idx=Math.max(0,Math.min(9,idx+((r()*5)|0)-2));
+    const semi=scale[idx%5]+12*Math.floor(idx/5);
+    addNote(x,SR,t,base*Math.pow(2,semi/12),0.55+r()*0.3,2.8,4);
+    if(n%4===0)addNote(x,SR,t,base/2*Math.pow(2,scale[(r()*5)|0]/12),0.9,1.6,2);
+  }
+  return x;
+}
+function genDrums(r,N,SR){
+  const x=new Float64Array(N),beat=60/112,dur=N/SR;
+  for(let b=0;b*beat/2<dur;b++){
+    const t=b*beat/2,k=b%8,s=Math.floor(t*SR);
+    if(k===0||k===3||k===4){const L=Math.min(N-s,Math.floor(0.25*SR));let ph=0;for(let i=0;i<L;i++){const u=i/SR,f=45+80*Math.exp(-u*28);ph+=2*Math.PI*f/SR;x[s+i]+=1.2*Math.sin(ph)*Math.exp(-u*14);}}
+    if(k===2||k===6){const L=Math.min(N-s,Math.floor(0.2*SR));for(let i=0;i<L;i++){const u=i/SR;x[s+i]+=0.8*(gauss(r)*Math.exp(-u*24)+0.6*Math.sin(2*Math.PI*190*u)*Math.exp(-u*30));}}
+    {const L=Math.min(N-s,Math.floor(0.05*SR));let prev=0;const a=(k%2?0.22:0.4);for(let i=0;i<L;i++){const u=i/SR,nz=gauss(r);x[s+i]+=a*(nz-prev)*Math.exp(-u*90);prev=nz;}}
+  }
+  return x;
+}
+function genSiren(r,N,SR){
+  const x=new Float64Array(N);let ph=0;
+  for(let n=0;n<N;n++){const t=n/SR,f=850+280*Math.sin(2*Math.PI*t/2.2);ph+=2*Math.PI*f/SR;x[n]=Math.sin(ph)+0.35*Math.sin(2*ph);}
+  return x;
+}
+function genBark(r,N,SR){
+  const x=new Float64Array(N),dur=N/SR;let t=0.3;
+  while(t<dur-0.3){
+    const nb=1+((r()*3)|0);
+    for(let c=0;c<nb&&t<dur-0.2;c++){
+      const len=0.09+r()*0.07,s=Math.floor(t*SR),L=Math.floor(len*SR),f0=320+r()*120;let ph=0;
+      for(let i=0;i<L&&s+i<N;i++){const u=i/L,f=f0*(1.15-0.3*u);ph+=2*Math.PI*f/SR;const env=Math.pow(Math.sin(Math.PI*Math.min(1,u*1.15)),0.7)*(1-0.4*u);
+        let v=0;for(let h=1;h<=6;h++)v+=Math.sin(h*ph)/h;x[s+i]+=env*(v+0.25*gauss(r));}
+      t+=len+0.09+r()*0.06;
+    }
+    t+=0.7+r()*1.2;
+  }
+  return x;
+}
+function makeDemoSources(seed,SR,dur,scene){
   const N=SR*dur,r=mulberry32(seed||7);
-  return [norm1(genBird(r,N,SR)),norm1(genChimes(r,N,SR)),norm1(genRain(r,N,SR))];
+  const G={bird:genBird,chimes:genChimes,rain:genRain,speech:genSpeech,melody:genMelody,drums:genDrums,siren:genSiren,bark:genBark};
+  const sets={forest:['bird','chimes','rain'],studio:['speech','melody','drums'],street:['speech','siren','bark']};
+  return (sets[scene]||sets.forest).map(k=>norm1(G[k](r,N,SR)));
 }
 function gaussianArray(N,seed){const r=mulberry32(seed);const x=new Float64Array(N);for(let i=0;i<N;i++)x[i]=gauss(r);return norm1(x);}
 
@@ -455,8 +541,13 @@ function separate(X,truthS,seed){
 const $=s=>document.querySelector(s);
 const COLORS=['#f2b45a','#b9a3f5','#5fd6b4'];
 const SAGE='#a3ad98';
-const DEF_NAMES=['Birdsong','Wind chimes','Rain'];
-const DEF_SUBS=['in the canopy','by the porch','on the leaves'];
+const SCENES={
+  forest:{names:['Birdsong','Wind chimes','Rain'],subs:['in the canopy','by the porch','on the leaves']},
+  studio:{names:['Voice','Melody','Drums'],subs:['singing along','keys and strings','rehearsal room']},
+  street:{names:['Conversation','Siren','Dog barking'],subs:['on the pavement','passing by','down the road']}};
+let scene='forest';
+const DEF_NAMES=SCENES.forest.names.slice();
+const DEF_SUBS=SCENES.forest.subs.slice();
 const state={sr:SR0,N:SR0*DUR0,S0:null,G:null,noiseU:null,gauss:[false,false,false],A:A_DEFAULT.map(r=>r.slice()),
   snr:50,mics:null,mode:'demo',labels:DEF_NAMES.slice(),subs:DEF_SUBS.slice(),res:null,hasRun:false,running:false,demoBackup:null};
 
@@ -800,7 +891,8 @@ function wireDrop(box,handler){
 function resetRunState(){state.res=null;state.hasRun=false;scatterData=null;drawScatter(0,0);markChip(-1);$('#cap').textContent='Every dot is one moment in time. Press the button and watch the cloud straighten out.';$('#statline').innerHTML='';
   outTracks.forEach(t=>{t.setData(null);t.setLabel('Output','waiting…');t.setColor('#5d6a5f');});
   outCards.forEach(o=>{o.kv.textContent='–';o.bar.style.width='0';o.sv.textContent='–';o.sv.className='sv';o.rt.textContent='';});
-  $('#runBtn').textContent='Unmix them ✦';}
+  $('#runBtn').textContent='Unmix them ✦';
+  drawSweep([40,30,20,15,10,5,0],[[],[],[]]);$('#sweepBtn').textContent='Run the test';}
 function backupDemo(){if(!state.demoBackup)state.demoBackup={S0:state.S0,sr:state.sr,N:state.N};}
 wireDrop($('#dropSrc'),async files=>{
   const {arrs,sr,names}=await decodeFiles(files);backupDemo();
@@ -820,13 +912,20 @@ wireDrop($('#dropMix'),async files=>{
   $('#upMsg').textContent='✓ Loaded. Head to step 3 and unmix.';
   location.hash='#c3';
 });
-$('#backDemo').onclick=()=>{
-  const b=state.demoBackup;if(b){state.S0=b.S0;state.sr=b.sr;state.N=b.N;}
-  state.mode='demo';state.G=null;ensureAux();document.body.classList.remove('micmode');$('#banner').classList.remove('on');
+function restoreDemo(key){
+  scene=key||scene;
+  DEF_NAMES.splice(0,3,...SCENES[scene].names);DEF_SUBS.splice(0,3,...SCENES[scene].subs);
+  stopAudio();
+  state.mode='demo';state.sr=SR0;state.N=SR0*DUR0;
+  state.S0=makeDemoSources(7,SR0,DUR0,scene);state.G=null;ensureAux();
+  document.body.classList.remove('micmode');$('#banner').classList.remove('on');
   state.labels=DEF_NAMES.slice();state.subs=DEF_SUBS.slice();state.gauss=[false,false,false];sws.forEach(s=>s.cb.checked=false);gaussHint();
   micTracks.forEach((t,i)=>t.setLabel('Microphone '+(i+1),'hears all three'));
   mkLegend();updateSources();recomputeMics();resetRunState();$('#upMsg').textContent='';
-};
+  document.querySelectorAll('#scenes .scene').forEach(b=>b.classList.toggle('on',b.dataset.scene===scene));
+}
+$('#backDemo').onclick=()=>restoreDemo();
+document.querySelectorAll('#scenes .scene').forEach(b=>b.onclick=()=>restoreDemo(b.dataset.scene));
 
 /* ---------- hero: painted forest made of dots ---------- */
 (function hero(){
@@ -902,9 +1001,10 @@ $('#backDemo').onclick=()=>{
 
 /* ---------- boot ---------- */
 (function boot(){
-  state.S0=makeDemoSources(7,SR0,DUR0);ensureAux();
+  state.S0=makeDemoSources(7,SR0,DUR0,scene);ensureAux();
   syncDials();labelsRefresh();mkLegend();updateSources();recomputeMics();
   $('#snr').style.setProperty('--p','100%');
+  document.querySelector('#scenes .scene[data-scene=forest]').classList.add('on');
 })();
 </script>
 </body>
